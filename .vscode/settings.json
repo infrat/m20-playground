@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "stm32l0xx_hal.h": "c",
+        "main.h": "c",
+        "*.c_exclude": "c",
+        "*.c_old": "c"
+    }
+}
