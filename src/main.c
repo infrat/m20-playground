@@ -1,7 +1,7 @@
 #include "stm32l0xx_hal.h"
 #include "stdio.h"
-#include <stdlib.h>
-#include <string.h>
+#include "stdlib.h"
+#include "string.h"
 
 USART_HandleTypeDef huart2;
 UART_HandleTypeDef lpuart;
@@ -39,7 +39,7 @@ TIM_HandleTypeDef htim2;
 #define WRITE_PROTOTYPE int _write(int file, char *ptr, int len)
 
 typedef struct {
-    uint32_t lat; uint32_t lon; uint16_t alt;
+    int32_t lat; int32_t lon; uint16_t alt;
     uint16_t vE; uint16_t vN; uint16_t vU;
     uint32_t date; uint32_t time;
     uint8_t sats; uint8_t fix;
@@ -227,7 +227,7 @@ int main(void)
   lpuart_init();
 
   HAL_UART_Receive_IT(&lpuart, (uint8_t*)&UartByte, 1);
-  
+
   printf("System operational. Waiting for GPS fix.\r\n");
 
   while(1)
@@ -244,7 +244,10 @@ int main(void)
       }
       if (datum.fix > 1) {
         get_GPSpos();
-        printf("GPS Lat: %f, Lon: %f, Alt: %f, Sats: %d\r\n", (float)datum.lat/1000000, (float)datum.lon/1000000, (float)datum.alt/100, datum.sats);
+        printf("GPS Lat: %ld.%06d, ", datum.lat/1000000, abs(datum.lat)%1000000);
+        printf("Lon: %ld.%06d, ", datum.lon/1000000, abs(datum.lon)%1000000);
+        printf("Alt: %d.%02d, ", datum.alt/100, abs(datum.alt)%100);
+        printf("Sats: %d\r\n", datum.sats);
         HAL_GPIO_WritePin(LED_GPIO_PORT, LED_PIN, GPIO_PIN_SET);
         HAL_Delay(50);
         HAL_GPIO_WritePin(LED_GPIO_PORT, LED_PIN, GPIO_PIN_RESET);
