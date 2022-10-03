@@ -142,8 +142,8 @@ void usart_gpio_init()
   __GPIOA_CLK_ENABLE();
 
   /**USART2 GPIO Configuration
-  PA2     ------> USART2_TX
-  PA3     ------> USART2_RX
+  PA10     ------> USART2_TX
+  PA9     ------> USART2_RX
   */
   GPIO_InitStruct.Pin = GPIO_PIN_10 | GPIO_PIN_9;
   GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
