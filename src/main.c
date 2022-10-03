@@ -158,7 +158,7 @@ void usart_init()
   __USART1_CLK_ENABLE();
 
   huart2.Instance = USART1;
-  huart2.Init.BaudRate = 38400;
+  huart2.Init.BaudRate = 115200;
   huart2.Init.WordLength = USART_WORDLENGTH_8B;
   huart2.Init.StopBits = USART_STOPBITS_1;
   huart2.Init.Parity = USART_PARITY_NONE;
