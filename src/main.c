@@ -85,7 +85,7 @@ static void Error_Handler(void)
   while (1)
   {
     HAL_GPIO_TogglePin(LED_GPIO_PORT, LED_PIN);
-    
+    HAL_Delay(50);
   }
 }
 
